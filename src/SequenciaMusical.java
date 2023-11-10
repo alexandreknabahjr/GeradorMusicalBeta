@@ -1,5 +1,6 @@
 
 import org.jfugue.midi.MidiDictionary;
+
 public class SequenciaMusical{
 
     private String textoInput;
