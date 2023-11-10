@@ -8,6 +8,8 @@ public class SequenciaMusical{
     private String textoInput;
     private final int DEFAULT_VOLUME = 100;
     private final int MAX_VOLUME = 127;
+    private final String DEFAULT_OITAVA = "5";
+    private final int MAX_OITAVA = 9;
 
     public SequenciaMusical(String textoInput) {
         this.textoInput = textoInput;
@@ -34,6 +36,7 @@ public class SequenciaMusical{
         String sequenciaMusical = instrumentoAtual;
         sequenciaMusical += Sons.TROCASOM.toString();
         String ultimaNota = "";
+        String ultimaOitava = DEFAULT_OITAVA;
 
         for(int i = 0; i < textoInput.length(); i++){
             char c = textoInput.charAt(i);
@@ -42,42 +45,49 @@ public class SequenciaMusical{
                 // Nota Lá
                 case 'A':
                     sequenciaMusical += NotasMusicais.LA.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.LA.toString();
                     break;
                 // Nota Si
                 case 'B':
                     sequenciaMusical += NotasMusicais.SI.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.SI.toString();
                     break;
                 // Nota Dó
                 case 'C':
                     sequenciaMusical += NotasMusicais.DO.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.DO.toString();
                     break;
                 // Nota Ré
                 case 'D':
                     sequenciaMusical += NotasMusicais.RE.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.RE.toString();
                     break;
                 // Nota Mi
                 case 'E':
                     sequenciaMusical += NotasMusicais.MI.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.MI.toString();
                     break;
                 // Nota Fá
                 case 'F':
                     sequenciaMusical += NotasMusicais.FA.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.FA.toString();
                     break;
                 // Nota Sol
                 case 'G':
                     sequenciaMusical += NotasMusicais.SOL.toString();
+                    sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     ultimaNota = NotasMusicais.SOL.toString();
                     break;
@@ -98,6 +108,13 @@ public class SequenciaMusical{
                     instrumentoAtual = converteString(instrumentoAtual, c);
                     sequenciaMusical += instrumentoAtual;
                     sequenciaMusical += Sons.TROCASOM.toString();
+                    break;
+                case '?':
+                    if(Integer.parseInt(ultimaOitava) >= MAX_OITAVA){
+                        ultimaOitava = DEFAULT_OITAVA;
+                    } else {
+                        ultimaOitava = Integer.toString(Integer.parseInt(ultimaOitava) + 1);
+                    }
                     break;
                 // Troca instrumento para Tubular Bells
                 case '\n':
