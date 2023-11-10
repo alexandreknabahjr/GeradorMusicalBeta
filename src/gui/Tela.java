@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Tela extends JFrame {
 
-    private Botao botaoGeraMusica = new Botao();
+    private Botao botaoGeraMusica;
 
     public Tela() throws IOException{
         setTitle("Gerador Musical");
@@ -17,6 +17,7 @@ public class Tela extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
+        botaoGeraMusica = new Botao();
         botaoGeraMusica.setText("Gerar Música");
         botaoGeraMusica.setBounds(220,250,150,50);
         add(botaoGeraMusica);
