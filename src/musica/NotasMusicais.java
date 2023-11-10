@@ -1,3 +1,5 @@
+package musica;
+
 public enum NotasMusicais {
 
     LA("A"),

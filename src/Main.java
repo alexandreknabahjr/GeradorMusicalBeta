@@ -1,3 +1,4 @@
+import musica.SequenciaMusical;
 import org.jfugue.player.Player;
 
 public class Main {

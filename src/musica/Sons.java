@@ -1,3 +1,5 @@
+package musica;
+
 public enum Sons {
 
     TROCASOM(" "),

@@ -1,4 +1,6 @@
+package musica;
 
+import musica.InstrumentosMusicais;
 import org.jfugue.midi.MidiDictionary;
 
 public class SequenciaMusical{

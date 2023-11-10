@@ -1,3 +1,5 @@
+package musica;
+
 public enum InstrumentosMusicais {
 
     AGOGO("I[Agogo]"),
