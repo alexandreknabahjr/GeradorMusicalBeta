@@ -1,6 +1,8 @@
 package gui;
 
+
 import javax.swing.*;
+
 
 public class CaixaTexto extends JTextArea {
 
