@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Tela extends JFrame {
 
-    Botao botaoGeraMusica = new Botao();
+    private Botao botaoGeraMusica = new Botao();
 
     public Tela() throws IOException{
         setTitle("Gerador Musical");
