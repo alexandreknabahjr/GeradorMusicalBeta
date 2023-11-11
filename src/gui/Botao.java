@@ -1,6 +1,7 @@
 package gui;
 
 import musica.SequenciaMusical;
+import org.jfugue.player.Player;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,8 @@ public class Botao extends JButton implements ActionListener {
             SequenciaMusical seq = new SequenciaMusical(inputUser);
             String decodSeq = seq.decodificaSequencia();
             System.out.println(decodSeq);
+            Player player = new Player();
+            player.play(decodSeq);
         }
     }
 }
