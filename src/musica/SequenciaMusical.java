@@ -8,7 +8,7 @@ public class SequenciaMusical{
     private String textoInput;
     private final int DEFAULT_VOLUME = 100;
     private final int MAX_VOLUME = 127;
-    private final String DEFAULT_OITAVA = "5";
+    private final int DEFAULT_OITAVA = 5;
     private final int MAX_OITAVA = 9;
 
     public SequenciaMusical(String textoInput) {
@@ -45,7 +45,7 @@ public class SequenciaMusical{
         String sequenciaMusical = instrumentoAtual;
         sequenciaMusical += Sons.TROCASOM.toString();
         String ultimaNota = "";
-        String ultimaOitava = DEFAULT_OITAVA;
+        String ultimaOitava = Integer.toString(DEFAULT_OITAVA);
 
         for(int i = 0; i < textoInput.length(); i++){
             char c = textoInput.charAt(i);
@@ -120,7 +120,7 @@ public class SequenciaMusical{
                     break;
                 case '?':
                     if(Integer.parseInt(ultimaOitava) >= MAX_OITAVA){
-                        ultimaOitava = DEFAULT_OITAVA;
+                        ultimaOitava = Integer.toString(DEFAULT_OITAVA);
                     } else {
                         ultimaOitava = Integer.toString(Integer.parseInt(ultimaOitava) + 1);
                     }
