@@ -47,42 +47,42 @@ public class SequenciaMusical{
                     sequenciaMusical += NotasMusicais.LA.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.LA.toString();
+                    ultimaNota = (NotasMusicais.LA.toString() + ultimaOitava);
                     break;
                 // Nota Si
                 case 'B':
                     sequenciaMusical += NotasMusicais.SI.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.SI.toString();
+                    ultimaNota = (NotasMusicais.SI.toString() + ultimaOitava);
                     break;
                 // Nota Dó
                 case 'C':
                     sequenciaMusical += NotasMusicais.DO.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.DO.toString();
+                    ultimaNota = (NotasMusicais.DO.toString() + ultimaOitava);
                     break;
                 // Nota Ré
                 case 'D':
                     sequenciaMusical += NotasMusicais.RE.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.RE.toString();
+                    ultimaNota = (NotasMusicais.RE.toString() + ultimaOitava);
                     break;
                 // Nota Mi
                 case 'E':
                     sequenciaMusical += NotasMusicais.MI.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.MI.toString();
+                    ultimaNota = (NotasMusicais.MI.toString() + ultimaOitava);
                     break;
                 // Nota Fá
                 case 'F':
                     sequenciaMusical += NotasMusicais.FA.toString();
                     sequenciaMusical += ultimaOitava;
                     sequenciaMusical += Sons.TROCASOM.toString();
-                    ultimaNota = NotasMusicais.FA.toString();
+                    ultimaNota = (NotasMusicais.FA.toString() + ultimaOitava);
                     break;
                 // Nota Sol
                 case 'G':
