@@ -39,13 +39,28 @@ public class SequenciaMusical{
         return "I[" + proxInstrumento + "]";
     }
 
+    private String inicializaSequencia(String instrumento){
+        return instrumento + Sons.TROCASOM.toString();
+    }
+
+    private String inicializaInstrumento(){
+        return InstrumentosMusicais.PIANO.toString();
+    }
+
+    private String inicializaNota(){
+        return "";
+    }
+
+    private String inicializaOitava(){
+        return Integer.toString(DEFAULT_OITAVA);
+    }
+
     public String decodificaSequencia(){
 
-        String instrumentoAtual = InstrumentosMusicais.PIANO.toString();
-        String sequenciaMusical = instrumentoAtual;
-        sequenciaMusical += Sons.TROCASOM.toString();
-        String ultimaNota = "";
-        String ultimaOitava = Integer.toString(DEFAULT_OITAVA);
+        String instrumentoAtual = inicializaInstrumento();
+        String sequenciaMusical = inicializaSequencia(instrumentoAtual);
+        String ultimaNota = inicializaNota();
+        String ultimaOitava = inicializaOitava();
 
         for(int i = 0; i < textoInput.length(); i++){
             char c = textoInput.charAt(i);
