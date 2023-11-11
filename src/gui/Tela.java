@@ -15,7 +15,8 @@ public class Tela extends JFrame{
         configTela();
         inputMusica = new CaixaTexto();
         botaoGeraMusica = new Botao(inputMusica);
-        adicionaComponentes(inputMusica, botaoGeraMusica);
+        scroll = new JScrollPane(inputMusica);
+        adicionaComponentes(scroll, botaoGeraMusica);
         setVisible(true);
     }
 
@@ -29,12 +30,13 @@ public class Tela extends JFrame{
         setIconImage(ImageIO.read(new File("img/nota.png")));
     }
 
-    private void adicionaComponentes(CaixaTexto caixa, Botao botao){
+    private void adicionaComponentes(JScrollPane scroll, Botao botao){
         botao.setText("Gerar Música");
         botao.setBounds(220,250,150,50);
-        caixa.setBounds(100, 100, 400, 100);
+        scroll.setBounds(100, 100, 400, 100);
         add(botao);
-        add(caixa);
+        add(scroll);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
 
     public static void main(String[] args) {
