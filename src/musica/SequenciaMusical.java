@@ -15,19 +15,28 @@ public class SequenciaMusical{
         this.textoInput = textoInput;
     }
 
-    private String converteString(String instrumentoAtual, char c){
+    private String limpaStringInstrumento(String instrumentoAtual){
 
-        String novoInstrumento = instrumentoAtual.replace("I", "");
-        novoInstrumento = novoInstrumento.replace("[", "");
-        novoInstrumento = novoInstrumento.replace("]", "");
+        return instrumentoAtual.replace("I", "").
+                replace("[", "").
+                replace("]", "");
+    }
 
-        String instrumentoNormalizado = novoInstrumento.toUpperCase();
-        int numeroInstrumento = (int) (MidiDictionary.INSTRUMENT_STRING_TO_BYTE.get(instrumentoNormalizado));
+    private String mapeiaInstrumento(String instrumento, char c){
+
+        String novoInstrumento = instrumento.toUpperCase();
+        int numeroInstrumento = (int) (MidiDictionary.INSTRUMENT_STRING_TO_BYTE.get(novoInstrumento));
         Byte bInstrumento = (byte) (numeroInstrumento + Character.getNumericValue(c));
-        String proximoInstrumento = MidiDictionary.INSTRUMENT_BYTE_TO_STRING.get(bInstrumento);
-        instrumentoAtual = "I[" + proximoInstrumento + "]";
 
-        return instrumentoAtual;
+        return MidiDictionary.INSTRUMENT_BYTE_TO_STRING.get(bInstrumento);
+    }
+
+    private String atualizaInstrumento(String instrumentoAtual, char c){
+
+        String novoInstrumento = limpaStringInstrumento(instrumentoAtual);
+        String proxInstrumento = mapeiaInstrumento(novoInstrumento, c);
+
+        return "I[" + proxInstrumento + "]";
     }
 
     public String decodificaSequencia(){
@@ -105,7 +114,7 @@ public class SequenciaMusical{
                     break;
                 // Troca instrumento
                 case '0', '1', '2', '3','4','5','6','7','8','9':
-                    instrumentoAtual = converteString(instrumentoAtual, c);
+                    instrumentoAtual = atualizaInstrumento(instrumentoAtual, c);
                     sequenciaMusical += instrumentoAtual;
                     sequenciaMusical += Sons.TROCASOM.toString();
                     break;
