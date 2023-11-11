@@ -1,11 +1,10 @@
 package musica;
 
-import musica.InstrumentosMusicais;
 import org.jfugue.midi.MidiDictionary;
 
 public class SequenciaMusical{
 
-    private String textoInput;
+    private final String textoInput;
     private final int DEFAULT_VOLUME = 100;
     private final int MAX_VOLUME = 127;
     private final int DEFAULT_OITAVA = 5;
