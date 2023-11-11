@@ -8,5 +8,6 @@ public class CaixaTexto extends JTextArea {
 
     public CaixaTexto(){
         super();
+        setLineWrap(true);
     }
 }
