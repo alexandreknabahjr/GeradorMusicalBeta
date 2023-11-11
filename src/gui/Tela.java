@@ -1,7 +1,5 @@
 package gui;
 
-import musica.SequenciaMusical;
-
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -11,9 +9,12 @@ public class Tela extends JFrame{
 
     private Botao botaoGeraMusica;
     private CaixaTexto inputMusica;
+    private JScrollPane scroll;
 
     public Tela() throws IOException{
         configTela();
+        inputMusica = new CaixaTexto();
+        botaoGeraMusica = new Botao(inputMusica);
         adicionaComponentes(inputMusica, botaoGeraMusica);
         setVisible(true);
     }
@@ -29,8 +30,6 @@ public class Tela extends JFrame{
     }
 
     private void adicionaComponentes(CaixaTexto caixa, Botao botao){
-        caixa = new CaixaTexto();
-        botao = new Botao(caixa);
         botao.setText("Gerar Música");
         botao.setBounds(220,250,150,50);
         caixa.setBounds(100, 100, 400, 100);
