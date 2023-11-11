@@ -162,16 +162,20 @@ public class SequenciaMusical{
                 // Consoantes que não são notas
                 // Nenhum char mapeado
                 default:
-                    if(textoInput.charAt(i - 1) == 'A' || textoInput.charAt(i - 1) == 'B'
-                            || textoInput.charAt(i - 1) == 'C' || textoInput.charAt(i - 1) == 'D'
-                            || textoInput.charAt(i - 1) == 'E' || textoInput.charAt(i - 1) == 'F'
-                            || textoInput.charAt(i - 1) == 'G') {
+                    if(i > 0){
+                        if(textoInput.charAt(i - 1) == 'A' || textoInput.charAt(i - 1) == 'B'
+                                || textoInput.charAt(i - 1) == 'C' || textoInput.charAt(i - 1) == 'D'
+                                || textoInput.charAt(i - 1) == 'E' || textoInput.charAt(i - 1) == 'F'
+                                || textoInput.charAt(i - 1) == 'G'){
 
-                        sequenciaMusical += ultimaNota;
-                        sequenciaMusical += Sons.TROCASOM.toString();
+                            sequenciaMusical += ultimaNota;
+                            sequenciaMusical += Sons.TROCASOM.toString();
 
-                    } else{
-
+                        } else{
+                            sequenciaMusical += Sons.MEIAPAUSA.toString();
+                            sequenciaMusical += Sons.TROCASOM.toString();
+                        }
+                    } else {
                         sequenciaMusical += Sons.MEIAPAUSA.toString();
                         sequenciaMusical += Sons.TROCASOM.toString();
                     }
