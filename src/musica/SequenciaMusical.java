@@ -113,7 +113,7 @@ public class SequenciaMusical{
                     sequenciaMusical.append(NotasMusicais.SOL);
                     sequenciaMusical.append(ultimaOitava);
                     sequenciaMusical.append(Sons.TROCASOM);
-                    ultimaNota = NotasMusicais.SOL.toString();
+                    ultimaNota = (NotasMusicais.SOL + ultimaOitava);
                     break;
                 // Troca instrumento para Agogo
                 case '!':
@@ -163,10 +163,10 @@ public class SequenciaMusical{
                 // Nenhum char mapeado
                 default:
                     if(i > 0){
-                        if(textoInput.charAt(i - 1) == 'A' || textoInput.charAt(i - 1) == 'B'
-                                || textoInput.charAt(i - 1) == 'C' || textoInput.charAt(i - 1) == 'D'
-                                || textoInput.charAt(i - 1) == 'E' || textoInput.charAt(i - 1) == 'F'
-                                || textoInput.charAt(i - 1) == 'G'){
+                        if(textoInput.charAt(i - 1) == (NotasMusicais.LA.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.SI.toChar())
+                                || textoInput.charAt(i - 1) == (NotasMusicais.DO.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.RE.toChar())
+                                || textoInput.charAt(i - 1) == (NotasMusicais.MI.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.FA.toChar())
+                                || textoInput.charAt(i - 1) == (NotasMusicais.SOL.toChar())){
 
                             sequenciaMusical.append(ultimaNota);
                             sequenciaMusical.append(Sons.TROCASOM);
