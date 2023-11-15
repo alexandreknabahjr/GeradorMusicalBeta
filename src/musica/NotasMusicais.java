@@ -20,4 +20,8 @@ public enum NotasMusicais {
     public String toString(){
         return codNota;
     }
+
+    public char toChar(){
+        return codNota.charAt(0);
+    }
 }
