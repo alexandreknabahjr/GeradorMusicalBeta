@@ -24,4 +24,14 @@ public enum NotasMusicais {
     public char toChar(){
         return codNota.charAt(0);
     }
+
+    public static boolean contem(char codNotaInput) {
+        for (NotasMusicais notasMusicais : values()) {
+            if (notasMusicais.codNota.equals(String.valueOf(codNotaInput))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

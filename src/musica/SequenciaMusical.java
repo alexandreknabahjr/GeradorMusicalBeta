@@ -162,23 +162,14 @@ public class SequenciaMusical{
                 // Consoantes que não são notas
                 // Nenhum char mapeado
                 default:
-                    if(i > 0){
-                        if(textoInput.charAt(i - 1) == (NotasMusicais.LA.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.SI.toChar())
-                                || textoInput.charAt(i - 1) == (NotasMusicais.DO.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.RE.toChar())
-                                || textoInput.charAt(i - 1) == (NotasMusicais.MI.toChar()) || textoInput.charAt(i - 1) == (NotasMusicais.FA.toChar())
-                                || textoInput.charAt(i - 1) == (NotasMusicais.SOL.toChar())){
-
-                            sequenciaMusical.append(ultimaNota);
-                            sequenciaMusical.append(Sons.TROCASOM);
-
-                        } else{
-                            sequenciaMusical.append(Sons.MEIAPAUSA);
-                            sequenciaMusical.append(Sons.TROCASOM);
-                        }
+                    if(i > 0 && NotasMusicais.contem(textoInput.charAt(i - 1))) {
+                        sequenciaMusical.append(ultimaNota);
                     } else {
                         sequenciaMusical.append(Sons.MEIAPAUSA);
-                        sequenciaMusical.append(Sons.TROCASOM);
                     }
+
+                    sequenciaMusical.append(Sons.TROCASOM);
+
                     break;
 
             }
