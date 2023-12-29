@@ -1,5 +1,7 @@
 package musica;
 
+import java.util.Random;
+
 public enum NotasMusicais {
 
     LA('A'),
@@ -20,6 +22,7 @@ public enum NotasMusicais {
     public String toString(){
         return String.valueOf(codNota);
     }
+
     public static boolean contem(char codNotaInput) {
         for (NotasMusicais notasMusicais : values()) {
             if (notasMusicais.codNota == codNotaInput) {
@@ -28,5 +31,12 @@ public enum NotasMusicais {
         }
 
         return false;
+    }
+
+    public static NotasMusicais obterNotaAleatoria() {
+        Random random = new Random();
+        NotasMusicais[] notas = NotasMusicais.values();
+
+        return notas[random.nextInt(notas.length)];
     }
 }
