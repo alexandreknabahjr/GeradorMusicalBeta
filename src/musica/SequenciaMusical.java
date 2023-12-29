@@ -65,116 +65,116 @@ public class SequenciaMusical{
         for(int i = 0; i < textoInput.length(); i++){
             char c = textoInput.charAt(i);
 
-            switch (c){
+            switch (c) {
                 // Nota Lá
-                case 'A':
-                    sequenciaMusical.append(NotasMusicais.LA);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'A', 'a':
                     ultimaNota = (NotasMusicais.LA + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Si
-                case 'B':
-                    sequenciaMusical.append(NotasMusicais.SI);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'B', 'b':
                     ultimaNota = (NotasMusicais.SI + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Dó
-                case 'C':
-                    sequenciaMusical.append(NotasMusicais.DO);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'C', 'c':
                     ultimaNota = (NotasMusicais.DO + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Ré
-                case 'D':
-                    sequenciaMusical.append(NotasMusicais.RE);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'D', 'd':
                     ultimaNota = (NotasMusicais.RE + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Mi
-                case 'E':
-                    sequenciaMusical.append(NotasMusicais.MI);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'E', 'e':
                     ultimaNota = (NotasMusicais.MI + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Fá
-                case 'F':
-                    sequenciaMusical.append(NotasMusicais.FA);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'F', 'f':
                     ultimaNota = (NotasMusicais.FA + ultimaOitava);
+                    sequenciaMusical.append(ultimaNota);
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Nota Sol
-                case 'G':
-                    sequenciaMusical.append(NotasMusicais.SOL);
-                    sequenciaMusical.append(ultimaOitava);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                case 'G', 'g':
                     ultimaNota = (NotasMusicais.SOL + ultimaOitava);
-                    break;
-                // Troca instrumento para Agogo
-                case '!':
-                    instrumentoAtual = InstrumentosMusicais.AGOGO.toString();
-                    sequenciaMusical.append(instrumentoAtual);
+                    sequenciaMusical.append(ultimaNota);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                // Troca instrumento para Harpschiord
+                // Silencio ou pausa
+                case ' ':
+                    sequenciaMusical.append(Sons.MEIAPAUSA);
+                    sequenciaMusical.append(Sons.TROCASOM);
+                    break;
+                // Aumenta volume
+                case '+':
+                    break;
+                // Volta volume default
+                case '-':
+                    break;
+                // Troca instrumento
                 case 'O', 'o', 'I', 'i', 'U', 'u':
-                    instrumentoAtual = InstrumentosMusicais.HARPSCHIORD.toString();
-                    sequenciaMusical.append(instrumentoAtual);
+                    if(i > 0 && NotasMusicais.contem(textoInput.charAt(i - 1))) {
+                        sequenciaMusical.append(ultimaNota);
+                    } else {
+                        // Telefone tocando
+                    }
+
+                    sequenciaMusical.append(Sons.TROCASOM);
+                    break;
+                // Atualiza oitava
+                case 'R':
+                    if (textoInput.charAt(i + 1) == '+') {
+                        i++;
+
+                        if (Integer.parseInt(ultimaOitava) >= MAX_OITAVA) {
+                            ultimaOitava = Integer.toString(DEFAULT_OITAVA);
+                        } else {
+                            ultimaOitava = Integer.toString(Integer.parseInt(ultimaOitava) + 1);
+                        }
+
+                    } else if (textoInput.charAt(i + 1) == '-') {
+                        i++;
+
+                        if (Integer.parseInt(ultimaOitava) <= 0) {
+                            ultimaOitava = Integer.toString(DEFAULT_OITAVA);
+                        } else {
+                            ultimaOitava = Integer.toString(Integer.parseInt(ultimaOitava) - 1);
+                        }
+                    }
+                    break;
+                // Toca nota aleatória
+                case '?':
+                    NotasMusicais nota = NotasMusicais.obterNotaAleatoria();
+                    sequenciaMusical.append(nota);
+                    sequenciaMusical.append(ultimaOitava);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Troca instrumento
-                case '0', '1', '2', '3','4','5','6','7','8','9':
+                case '\n':
                     instrumentoAtual = atualizaInstrumento(instrumentoAtual, c);
                     sequenciaMusical.append(instrumentoAtual);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                case '?':
-                    if(Integer.parseInt(ultimaOitava) >= MAX_OITAVA){
-                        ultimaOitava = Integer.toString(DEFAULT_OITAVA);
-                    } else {
-                        ultimaOitava = Integer.toString(Integer.parseInt(ultimaOitava) + 1);
-                    }
-                    break;
-                // Troca instrumento para Tubular Bells
-                case '\n':
-                    instrumentoAtual = InstrumentosMusicais.TUBULARBELLS.toString();
-                    sequenciaMusical.append(instrumentoAtual);
-                    sequenciaMusical.append(Sons.TROCASOM);
-                    break;
-                // Troca instrumento para Pan Flute
+                // Aumenta BPM em 80
+                //case 'BPM+':
+
+                //    break;
+                // BPM com valor aleatório
                 case ';':
-                    instrumentoAtual = InstrumentosMusicais.PANFLUTE.toString();
-                    sequenciaMusical.append(instrumentoAtual);
-                    sequenciaMusical.append(Sons.TROCASOM);
+
                     break;
-                // Troca instrumento para Church Organ
-                case ',':
-                    instrumentoAtual = InstrumentosMusicais.CHURCHORGAN.toString();
-                    sequenciaMusical.append(instrumentoAtual);
-                    sequenciaMusical.append(Sons.TROCASOM);
-                    break;
-                // Letras minúsculas
-                // Consoantes que não são notas
-                // Nenhum char mapeado
                 default:
-                    if(i > 0 && NotasMusicais.contem(textoInput.charAt(i - 1))) {
-                        sequenciaMusical.append(ultimaNota);
-                    } else {
-                        sequenciaMusical.append(Sons.MEIAPAUSA);
-                    }
-
-                    sequenciaMusical.append(Sons.TROCASOM);
-
                     break;
 
             }
-
-
         }
         return sequenciaMusical.toString();
     }
