@@ -6,6 +6,7 @@ import org.jfugue.player.Player;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Botao extends JButton implements ActionListener {
 
@@ -19,6 +20,9 @@ public class Botao extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()== this){
+            try {
+                new TelaReproducao();
+            } catch (IOException n){}
             String inputUser = inputMusica.getText();
             SequenciaMusical seq = new SequenciaMusical(inputUser);
             String decodSeq = seq.decodificaSequencia();

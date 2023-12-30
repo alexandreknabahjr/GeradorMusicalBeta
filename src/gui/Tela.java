@@ -1,9 +1,13 @@
 package gui;
 
 import javax.swing.*;
+import java.awt.BasicStroke;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.*;
 
 public class Tela extends JFrame{
 
@@ -11,12 +15,15 @@ public class Tela extends JFrame{
     private CaixaTexto inputMusica;
     private JScrollPane scroll;
 
+
     public Tela() throws IOException{
         configTela();
+        adicionaMenu();
+        JLabel label = new JLabel("Digite o texto: ");
         inputMusica = new CaixaTexto();
         botaoGeraMusica = new Botao(inputMusica);
         scroll = new JScrollPane(inputMusica);
-        adicionaComponentes(scroll, botaoGeraMusica);
+        adicionaComponentes(scroll, botaoGeraMusica, inputMusica, label);
         setVisible(true);
     }
 
@@ -30,13 +37,49 @@ public class Tela extends JFrame{
         setIconImage(ImageIO.read(new File("img/nota.png")));
     }
 
-    private void adicionaComponentes(JScrollPane scroll, Botao botao){
+    private void adicionaComponentes(JScrollPane scroll, Botao botao, CaixaTexto inputMusica, JLabel label){
+
         botao.setText("Gerar Música");
         botao.setBounds(220,250,150,50);
+        botao.setBackground(new Color(255,255,255));
+        botao.setLayout(null);
+        botao.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+    
+
         scroll.setBounds(100, 100, 400, 100);
+
+        inputMusica.setBackground(Color.lightGray);
+        inputMusica.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+
+        label.setBounds(100, 50, 200, 50);
+        label.setFont(new Font(null,Font.BOLD,20));
+
+
+
+        //label.setFont(new Font("Serif", Font.PLAIN, 36));
+
         add(botao);
         add(scroll);
+        add(label);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    }
+
+    private void adicionaMenu(){
+        JMenuBar barraSuperior = new JMenuBar();
+
+        JMenu arquivos = new JMenu("Arquivos");
+        JMenu ajuda = new JMenu("Ajuda");
+
+        JMenuItem abrir = new JMenuItem("Abrir Arquivo");
+        JMenuItem salvar = new JMenuItem("Salvar arquivo");
+
+        arquivos.add(abrir);
+        arquivos.add(salvar);
+        barraSuperior.add(arquivos);
+        barraSuperior.add(ajuda);
+        barraSuperior.setBackground(Color.lightGray);
+        barraSuperior.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+        this.setJMenuBar(barraSuperior);
     }
 
     public static void main(String[] args) {
