@@ -1,12 +1,15 @@
 package gui;
 
 import musica.SequenciaMusical;
-import org.jfugue.player.Player;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import org.jfugue.midi.MidiParserListener;
+import org.jfugue.player.ManagedPlayer;
+import org.staccato.StaccatoParser;
 
 public class Botao extends JButton implements ActionListener {
 
@@ -20,15 +23,20 @@ public class Botao extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()== this){
-            try {
-                new TelaReproducao();
-            } catch (IOException n){}
             String inputUser = inputMusica.getText();
             SequenciaMusical seq = new SequenciaMusical(inputUser);
             String decodSeq = seq.decodificaSequencia();
+            StaccatoParser staccatoParser = new StaccatoParser();
+            MidiParserListener midiParserListener= new MidiParserListener();
+            staccatoParser.addParserListener(midiParserListener);
+            staccatoParser.parse(decodSeq);
+
+            ManagedPlayer player = new ManagedPlayer();
+
             System.out.println(decodSeq);
-            Player player = new Player();
-            player.play(decodSeq);
+             try {
+                new TelaReproducao(midiParserListener.getSequence(), player);
+            } catch (IOException n){}
         }
     }
 }
