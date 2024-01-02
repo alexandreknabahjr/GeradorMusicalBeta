@@ -6,30 +6,17 @@ import java.awt.event.ActionEvent;
 
 public class BotaoAjuda extends JButton implements ActionListener{
     
-    int estado;
-    public BotaoAjuda(){
-        this.estado = 0;
+    TelaAjuda tela;
+    public BotaoAjuda(TelaAjuda atual){
+        this.tela = atual;
+        addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
+
         if(e.getSource() == this){
-            switch (estado) {
-                case 0:
-                    try {
-                        new TelaAjuda();
-                    } catch (Exception e1) {
-                    }
-                    estado++;
-                    break;
-                case 1:
-                    
-                    break;
-                default:
-                    break;
-            }
-            
-            
-        }
-    }
+            tela.dispose();
+        }    
+     }
 }

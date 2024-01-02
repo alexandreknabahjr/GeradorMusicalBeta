@@ -65,12 +65,18 @@ public class TelaReproducao extends JFrame{
         reproduzir.setOpaque(false);
 
         JPanel painel = new JPanel();
-        painel.setBounds(70,150,450,10);
+        painel.setBounds(70,150,450,11);
         painel.setBackground(Color.black);
+
+        JPanel progresso = new JPanel();
+        progresso.setBounds(70, 145, 25, 25);
+        progresso.setBackground(Color.black);
+        
 
         //label.setFont(new Font("Serif", Font.PLAIN, 36));
 
         add(painel);
+        add(progresso);
         add(pausar);
         add(reproduzir);
         add(timer);

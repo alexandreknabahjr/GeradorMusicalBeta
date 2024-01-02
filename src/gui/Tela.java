@@ -1,12 +1,13 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.BasicStroke;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Color;
-import javax.swing.JLabel;
+
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
 import java.awt.*;
 
 public class Tela extends JFrame{
@@ -77,10 +78,13 @@ public class Tela extends JFrame{
         arquivos.add(salvar);
         barraSuperior.add(arquivos);
         barraSuperior.add(ajuda);
+        new ajudaMenuClique(ajuda);
         barraSuperior.setBackground(Color.lightGray);
         barraSuperior.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
         this.setJMenuBar(barraSuperior);
+
     }
+
 
     public static void main(String[] args) {
         try {
