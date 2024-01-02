@@ -1,7 +1,5 @@
 package musica;
 
-import org.jfugue.midi.MidiDictionary;
-
 public class SequenciaMusical{
 
     private final String textoInput;
@@ -9,43 +7,17 @@ public class SequenciaMusical{
     private final int MAX_VOLUME = 127;
     private final int DEFAULT_OITAVA = 5;
     private final int MAX_OITAVA = 9;
+    private Instrumento instrumento;
     private Bpm bpm;
 
     public SequenciaMusical(String textoInput) {
         this.textoInput = textoInput;
         this.bpm = new Bpm();
-    }
-
-    private String limpaStringInstrumento(String instrumentoAtual){
-
-        return instrumentoAtual.replace("I", "").
-                replace("[", "").
-                replace("]", "");
-    }
-
-    private String mapeiaInstrumento(String instrumento, char c){
-
-        String novoInstrumento = instrumento.toUpperCase();
-        int numeroInstrumento = (int) (MidiDictionary.INSTRUMENT_STRING_TO_BYTE.get(novoInstrumento));
-        Byte bInstrumento = (byte) (numeroInstrumento + Character.getNumericValue(c));
-
-        return MidiDictionary.INSTRUMENT_BYTE_TO_STRING.get(bInstrumento);
-    }
-
-    private String atualizaInstrumento(String instrumentoAtual, char c){
-
-        String novoInstrumento = limpaStringInstrumento(instrumentoAtual);
-        String proxInstrumento = mapeiaInstrumento(novoInstrumento, c);
-
-        return "I[" + proxInstrumento + "]";
+        this.instrumento = new Instrumento(InstrumentosMusicais.PIANO.toString());
     }
 
     private String inicializaSequencia(){
         return Sons.TROCASOM.toString();
-    }
-
-    private String inicializaInstrumento(){
-        return InstrumentosMusicais.PIANO.toString();
     }
 
     private String inicializaNota(){
@@ -62,8 +34,7 @@ public class SequenciaMusical{
 
     public String decodificaSequencia(){
 
-        String instrumentoAtual = inicializaInstrumento();
-        StringBuilder sequenciaMusical = new StringBuilder(instrumentoAtual);
+        StringBuilder sequenciaMusical = new StringBuilder(instrumento.obterNome());
         sequenciaMusical.append(inicializaSequencia());
         String ultimaNota = inicializaNota();
         String ultimaOitava = inicializaOitava();
@@ -172,8 +143,8 @@ public class SequenciaMusical{
                     break;
                 // Troca instrumento
                 case '\n':
-                    instrumentoAtual = atualizaInstrumento(instrumentoAtual, c);
-                    sequenciaMusical.append(instrumentoAtual);
+                    instrumento.trocaAleatoria();
+                    sequenciaMusical.append(instrumento.obterNome());
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // BPM com valor aleatório
