@@ -9,9 +9,11 @@ public class SequenciaMusical{
     private final int MAX_VOLUME = 127;
     private final int DEFAULT_OITAVA = 5;
     private final int MAX_OITAVA = 9;
+    private Bpm bpm;
 
     public SequenciaMusical(String textoInput) {
         this.textoInput = textoInput;
+        this.bpm = new Bpm();
     }
 
     private String limpaStringInstrumento(String instrumentoAtual){
@@ -54,6 +56,10 @@ public class SequenciaMusical{
         return Integer.toString(DEFAULT_OITAVA);
     }
 
+    public boolean sequenciaBpmMais(int i) {
+        return textoInput.charAt(i) == 'B' && textoInput.charAt(i+1) == 'P' && textoInput.charAt(i+2) == 'M' && textoInput.charAt(i+3) == '+';
+    }
+
     public String decodificaSequencia(){
 
         String instrumentoAtual = inicializaInstrumento();
@@ -72,11 +78,18 @@ public class SequenciaMusical{
                     sequenciaMusical.append(ultimaNota);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                // Nota Si
                 case 'B', 'b':
-                    ultimaNota = (NotasMusicais.SI + ultimaOitava);
-                    sequenciaMusical.append(ultimaNota);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                    if (i + 3 < textoInput.length() && sequenciaBpmMais(i)) {
+                        // Aumenta BPM em 80
+                        bpm.aumentaBatidasPorMinuto(80);
+                        sequenciaMusical.append(bpm.obterBatidasPorMinuto());
+                        sequenciaMusical.append(Sons.TROCASOM);
+                    } else {
+                        // Nota Si
+                        ultimaNota = (NotasMusicais.SI + ultimaOitava);
+                        sequenciaMusical.append(ultimaNota);
+                        sequenciaMusical.append(Sons.TROCASOM);
+                    }
                     break;
                 // Nota Dó
                 case 'C', 'c':
@@ -163,13 +176,11 @@ public class SequenciaMusical{
                     sequenciaMusical.append(instrumentoAtual);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                // Aumenta BPM em 80
-                //case 'BPM+':
-
-                //    break;
                 // BPM com valor aleatório
                 case ';':
-
+                    bpm.trocaAleatoria();
+                    sequenciaMusical.append(bpm.obterBatidasPorMinuto());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 default:
                     break;
