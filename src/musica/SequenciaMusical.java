@@ -1,49 +1,23 @@
 package musica;
 
-import org.jfugue.midi.MidiDictionary;
-
 public class SequenciaMusical{
 
     private final String textoInput;
-    private final int DEFAULT_VOLUME = 100;
-    private final int MAX_VOLUME = 127;
     private final int DEFAULT_OITAVA = 5;
     private final int MAX_OITAVA = 9;
+    private Instrumento instrumento;
+    private Bpm bpm;
+    private Volume volume;
 
     public SequenciaMusical(String textoInput) {
         this.textoInput = textoInput;
-    }
-
-    private String limpaStringInstrumento(String instrumentoAtual){
-
-        return instrumentoAtual.replace("I", "").
-                replace("[", "").
-                replace("]", "");
-    }
-
-    private String mapeiaInstrumento(String instrumento, char c){
-
-        String novoInstrumento = instrumento.toUpperCase();
-        int numeroInstrumento = (int) (MidiDictionary.INSTRUMENT_STRING_TO_BYTE.get(novoInstrumento));
-        Byte bInstrumento = (byte) (numeroInstrumento + Character.getNumericValue(c));
-
-        return MidiDictionary.INSTRUMENT_BYTE_TO_STRING.get(bInstrumento);
-    }
-
-    private String atualizaInstrumento(String instrumentoAtual, char c){
-
-        String novoInstrumento = limpaStringInstrumento(instrumentoAtual);
-        String proxInstrumento = mapeiaInstrumento(novoInstrumento, c);
-
-        return "I[" + proxInstrumento + "]";
+        this.bpm = new Bpm();
+        this.instrumento = new Instrumento(InstrumentosMusicais.PIANO.toString());
+        this.volume = new Volume();
     }
 
     private String inicializaSequencia(){
         return Sons.TROCASOM.toString();
-    }
-
-    private String inicializaInstrumento(){
-        return InstrumentosMusicais.PIANO.toString();
     }
 
     private String inicializaNota(){
@@ -54,11 +28,16 @@ public class SequenciaMusical{
         return Integer.toString(DEFAULT_OITAVA);
     }
 
+    public boolean sequenciaBpmMais(int i) {
+        return textoInput.charAt(i) == 'B' && textoInput.charAt(i+1) == 'P' && textoInput.charAt(i+2) == 'M' && textoInput.charAt(i+3) == '+';
+    }
+
     public String decodificaSequencia(){
 
-        String instrumentoAtual = inicializaInstrumento();
-        StringBuilder sequenciaMusical = new StringBuilder(instrumentoAtual);
+        StringBuilder sequenciaMusical = new StringBuilder(instrumento.obterNome());
         sequenciaMusical.append(inicializaSequencia());
+        sequenciaMusical.append(volume.obterValor());
+        sequenciaMusical.append(Sons.TROCASOM);
         String ultimaNota = inicializaNota();
         String ultimaOitava = inicializaOitava();
 
@@ -72,11 +51,18 @@ public class SequenciaMusical{
                     sequenciaMusical.append(ultimaNota);
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                // Nota Si
                 case 'B', 'b':
-                    ultimaNota = (NotasMusicais.SI + ultimaOitava);
-                    sequenciaMusical.append(ultimaNota);
-                    sequenciaMusical.append(Sons.TROCASOM);
+                    if (i + 3 < textoInput.length() && sequenciaBpmMais(i)) {
+                        // Aumenta BPM em 80
+                        bpm.aumentaBatidasPorMinuto(80);
+                        sequenciaMusical.append(bpm.obterBatidasPorMinuto());
+                        sequenciaMusical.append(Sons.TROCASOM);
+                    } else {
+                        // Nota Si
+                        ultimaNota = (NotasMusicais.SI + ultimaOitava);
+                        sequenciaMusical.append(ultimaNota);
+                        sequenciaMusical.append(Sons.TROCASOM);
+                    }
                     break;
                 // Nota Dó
                 case 'C', 'c':
@@ -115,16 +101,22 @@ public class SequenciaMusical{
                     break;
                 // Aumenta volume
                 case '+':
+                    volume.dobraValor();
+                    sequenciaMusical.append(volume.obterValor());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Volta volume default
                 case '-':
+                    volume.resetaValor();
+                    sequenciaMusical.append(volume.obterValor());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Troca instrumento
                 case 'O', 'o', 'I', 'i', 'U', 'u':
                     if(i > 0 && NotasMusicais.contem(textoInput.charAt(i - 1))) {
                         sequenciaMusical.append(ultimaNota);
                     } else {
-                        // Telefone tocando
+                        sequenciaMusical.append(InstrumentosMusicais.TELEPHONE_RING);
                     }
 
                     sequenciaMusical.append(Sons.TROCASOM);
@@ -159,17 +151,15 @@ public class SequenciaMusical{
                     break;
                 // Troca instrumento
                 case '\n':
-                    instrumentoAtual = atualizaInstrumento(instrumentoAtual, c);
-                    sequenciaMusical.append(instrumentoAtual);
+                    instrumento.trocaAleatoria();
+                    sequenciaMusical.append(instrumento.obterNome());
                     sequenciaMusical.append(Sons.TROCASOM);
                     break;
-                // Aumenta BPM em 80
-                //case 'BPM+':
-
-                //    break;
                 // BPM com valor aleatório
                 case ';':
-
+                    bpm.trocaAleatoria();
+                    sequenciaMusical.append(bpm.obterBatidasPorMinuto());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 default:
                     break;

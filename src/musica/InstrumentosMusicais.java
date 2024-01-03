@@ -7,7 +7,8 @@ public enum InstrumentosMusicais {
     TUBULARBELLS("I[Tubular_Bells]"),
     PANFLUTE("I[Pan_Flute]"),
     CHURCHORGAN("I[Church_Organ]"),
-    PIANO("I[Piano]");
+    PIANO("I[Piano]"),
+    TELEPHONE_RING("I[Telephone_Ring]");
 
     private String codInstrumento;
 
