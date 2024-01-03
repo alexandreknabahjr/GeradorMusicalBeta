@@ -74,7 +74,7 @@ public class Tela extends JFrame{
         arquivos.add(salvar);
         barraSuperior.add(arquivos);
         barraSuperior.add(ajuda);
-        new ajudaMenuClique(ajuda);
+        new MenuClique(ajuda, salvar, abrir);
         barraSuperior.setBackground(Color.lightGray);
         barraSuperior.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
         this.setJMenuBar(barraSuperior);
