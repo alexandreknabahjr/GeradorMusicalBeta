@@ -3,17 +3,17 @@ package musica;
 public class SequenciaMusical{
 
     private final String textoInput;
-    private final int DEFAULT_VOLUME = 100;
-    private final int MAX_VOLUME = 127;
     private final int DEFAULT_OITAVA = 5;
     private final int MAX_OITAVA = 9;
     private Instrumento instrumento;
     private Bpm bpm;
+    private Volume volume;
 
     public SequenciaMusical(String textoInput) {
         this.textoInput = textoInput;
         this.bpm = new Bpm();
         this.instrumento = new Instrumento(InstrumentosMusicais.PIANO.toString());
+        this.volume = new Volume();
     }
 
     private String inicializaSequencia(){
@@ -36,6 +36,8 @@ public class SequenciaMusical{
 
         StringBuilder sequenciaMusical = new StringBuilder(instrumento.obterNome());
         sequenciaMusical.append(inicializaSequencia());
+        sequenciaMusical.append(volume.obterValor());
+        sequenciaMusical.append(Sons.TROCASOM);
         String ultimaNota = inicializaNota();
         String ultimaOitava = inicializaOitava();
 
@@ -99,16 +101,22 @@ public class SequenciaMusical{
                     break;
                 // Aumenta volume
                 case '+':
+                    volume.dobraValor();
+                    sequenciaMusical.append(volume.obterValor());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Volta volume default
                 case '-':
+                    volume.resetaValor();
+                    sequenciaMusical.append(volume.obterValor());
+                    sequenciaMusical.append(Sons.TROCASOM);
                     break;
                 // Troca instrumento
                 case 'O', 'o', 'I', 'i', 'U', 'u':
                     if(i > 0 && NotasMusicais.contem(textoInput.charAt(i - 1))) {
                         sequenciaMusical.append(ultimaNota);
                     } else {
-                        // Telefone tocando
+                        sequenciaMusical.append(InstrumentosMusicais.TELEPHONE_RING);
                     }
 
                     sequenciaMusical.append(Sons.TROCASOM);
