@@ -37,10 +37,11 @@ public class Tela extends JFrame{
     private void adicionaComponentes(JScrollPane scroll, Botao botao, CaixaTexto inputMusica, JLabel label){
 
         botao.setText("Gerar Música");
-        botao.setBounds(220,250,150,50);
+        botao.setBounds(220,250,150,60);
         botao.setBackground(new Color(255,255,255));
         botao.setLayout(null);
-        botao.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+        //botao.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+        botao.setBorder(new BordaCircular(12));
     
 
         scroll.setBounds(100, 100, 400, 100);
