@@ -4,10 +4,6 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-
 import java.awt.*;
 
 public class Tela extends JFrame{
