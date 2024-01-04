@@ -11,15 +11,16 @@ public class Tela extends JFrame{
     private Botao botaoGeraMusica;
     private CaixaTexto inputMusica;
     private JScrollPane scroll;
-
+    private ItemImportarArquivo importaArquivo;
 
     public Tela() throws IOException{
         configTela();
-        adicionaMenu();
         JLabel label = new JLabel("Digite o texto: ");
         inputMusica = new CaixaTexto();
+        importaArquivo = new ItemImportarArquivo(inputMusica);
         botaoGeraMusica = new Botao(inputMusica);
         scroll = new JScrollPane(inputMusica);
+        adicionaMenu();
         adicionaComponentes(scroll, botaoGeraMusica, inputMusica, label);
         setVisible(true);
     }
@@ -63,23 +64,19 @@ public class Tela extends JFrame{
     }
 
     private void adicionaMenu(){
-        JMenuBar barraSuperior = new JMenuBar();
-
-        JMenu arquivos = new JMenu("Arquivos");
+        JMenuBar barraMenu = new JMenuBar();
+        JMenu menuOpcoes = new JMenu("Opções");
         JMenu ajuda = new JMenu("Ajuda");
 
-        JMenuItem abrir = new JMenuItem("Abrir Arquivo");
-        JMenuItem salvar = new JMenuItem("Salvar arquivo");
+        menuOpcoes.add(importaArquivo);
 
-        arquivos.add(abrir);
-        arquivos.add(salvar);
-        barraSuperior.add(arquivos);
-        barraSuperior.add(ajuda);
-        new MenuClique(ajuda, salvar, abrir);
-        barraSuperior.setBackground(Color.lightGray);
-        barraSuperior.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
-        this.setJMenuBar(barraSuperior);
+        barraMenu.add(menuOpcoes);
+        barraMenu.add(ajuda);
 
+        new MenuClique(ajuda);
+        barraMenu.setBackground(Color.lightGray);
+        barraMenu.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
+        this.setJMenuBar(barraMenu);
     }
 
 
