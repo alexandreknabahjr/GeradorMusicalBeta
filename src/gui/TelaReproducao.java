@@ -15,14 +15,17 @@ public class TelaReproducao extends JFrame{
 
     private BotaoPausa pausar;
     private BotaoReproducao reproduzir;
-    private barraDeProgresso timer;
 
     public TelaReproducao(Sequence decodSeq, ManagedPlayer player) throws IOException{
         configReproducao();
-        pausar = new BotaoPausa(player);
-        reproduzir = new BotaoReproducao(decodSeq, player);
-        timer = new barraDeProgresso();
-        adicionaComponentesReproducao(pausar, reproduzir, timer);
+        JPanel progresso = new JPanel();
+        progresso.setBounds(70, 145, 25, 25);
+        progresso.setBackground(Color.black);
+        add(progresso);
+        barraDeProgresso timer = new barraDeProgresso(player, progresso, decodSeq);
+        pausar = new BotaoPausa(player, timer);
+        reproduzir = new BotaoReproducao(decodSeq, player, timer);
+        adicionaComponentesReproducao(pausar, reproduzir, player);
         setVisible(true);
     }
 
@@ -36,7 +39,7 @@ public class TelaReproducao extends JFrame{
         setIconImage(ImageIO.read(new File("img/nota.png")));
     }
 
-    private void adicionaComponentesReproducao(BotaoPausa pausar, BotaoReproducao reproduzir, barraDeProgresso timer){
+    private void adicionaComponentesReproducao(BotaoPausa pausar, BotaoReproducao reproduzir, ManagedPlayer player){
 
         ImageIcon pausaIcon = new ImageIcon("img/pause-button.png");
         Image pauseImage = pausaIcon.getImage(); 
@@ -67,18 +70,13 @@ public class TelaReproducao extends JFrame{
         JPanel painel = new JPanel();
         painel.setBounds(70,150,450,11);
         painel.setBackground(Color.black);
-
-        JPanel progresso = new JPanel();
-        progresso.setBounds(70, 145, 25, 25);
-        progresso.setBackground(Color.black);
+        
         
 
         //label.setFont(new Font("Serif", Font.PLAIN, 36));
 
         add(painel);
-        add(progresso);
         add(pausar);
         add(reproduzir);
-        add(timer);
     }
 }

@@ -1,9 +1,7 @@
 package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import org.jfugue.player.ManagedPlayer;
-
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
@@ -13,9 +11,12 @@ public class BotaoReproducao extends JButton implements ActionListener{
     
     Sequence musica;
     ManagedPlayer player;
-    public BotaoReproducao(Sequence decodSequence, ManagedPlayer parser){
+    barraDeProgresso timer;
+
+    public BotaoReproducao(Sequence decodSequence, ManagedPlayer parser, barraDeProgresso timer){
         this.musica = decodSequence;
         this.player = parser;
+        this.timer = timer;
         addActionListener(this);
     }
 
@@ -25,6 +26,8 @@ public class BotaoReproducao extends JButton implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == this){
             try {
+                timer.iniciaBarra();
+                timer.pausado = false;
                 player.start(musica);
             } catch (InvalidMidiDataException e1) {
                 e1.printStackTrace();
