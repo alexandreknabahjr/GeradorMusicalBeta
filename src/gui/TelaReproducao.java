@@ -15,6 +15,7 @@ public class TelaReproducao extends JFrame{
 
     private BotaoPausa pausar;
     private BotaoReproducao reproduzir;
+    private BotaoSalvamento salvar;
 
     public TelaReproducao(Sequence decodSeq, ManagedPlayer player) throws IOException{
         configReproducao();
@@ -25,6 +26,7 @@ public class TelaReproducao extends JFrame{
         barraDeProgresso timer = new barraDeProgresso(player, progresso, decodSeq);
         pausar = new BotaoPausa(player, timer);
         reproduzir = new BotaoReproducao(decodSeq, player, timer);
+        salvar = new BotaoSalvamento(decodSeq);
         adicionaComponentesReproducao(pausar, reproduzir, player);
         setVisible(true);
     }
@@ -45,7 +47,7 @@ public class TelaReproducao extends JFrame{
         Image pauseImage = pausaIcon.getImage(); 
         Image newimgPause = pauseImage.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
         pausaIcon = new ImageIcon(newimgPause);
-        pausar.setBounds(320,210,100,100);
+        pausar.setBounds(250,210,100,100);
         pausar.setLayout(null);
         pausar.setIcon(pausaIcon);
         pausar.setBorder(null);
@@ -55,10 +57,10 @@ public class TelaReproducao extends JFrame{
         pausar.setOpaque(false);
 
         ImageIcon reproduzIcon = new ImageIcon("img/play-button.png");
-        Image reproduzImage = reproduzIcon.getImage(); 
-        Image newimgReproduz = reproduzImage.getScaledInstance(90, 90,  java.awt.Image.SCALE_SMOOTH);
+        Image reproduzImage = reproduzIcon.getImage();
+        Image newimgReproduz = reproduzImage.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
         reproduzIcon = new ImageIcon(newimgReproduz);
-        reproduzir.setBounds(160, 210, 90, 90);
+        reproduzir.setBounds(100, 210, 100, 100);
         reproduzir.setLayout(null);
         reproduzir.setIcon(reproduzIcon);
         reproduzir.setBorder(null);
@@ -70,13 +72,10 @@ public class TelaReproducao extends JFrame{
         JPanel painel = new JPanel();
         painel.setBounds(70,150,450,11);
         painel.setBackground(Color.black);
-        
-        
-
-        //label.setFont(new Font("Serif", Font.PLAIN, 36));
 
         add(painel);
         add(pausar);
         add(reproduzir);
+        add(salvar);
     }
 }
