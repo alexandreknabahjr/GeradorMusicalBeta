@@ -38,14 +38,14 @@ public class TelaAjuda extends JFrame {
 
     private void adicionaComponentesAjuda(BotaoAjuda botaoOk, JLabel texto1, JLabel texto2, JLabel texto3){
         botaoOk.setText("OK");
-        botaoOk.setBounds(WIDTH / 2 - 55, 160, 60, 30);
+        botaoOk.setBounds(WIDTH / 2 - 55, 180, 60, 30);
         botaoOk.setBackground(Color.white);
         botaoOk.setLayout(null);
         botaoOk.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
 
-        texto1.setBounds(10, -80, WIDTH, HEIGHT);
-        texto2.setBounds(10, -60, WIDTH, HEIGHT);
-        texto3.setBounds(10, -40, WIDTH, HEIGHT);
+        texto1.setBounds(45, -80, WIDTH, HEIGHT);
+        texto2.setBounds(45, -60, WIDTH, HEIGHT);
+        texto3.setBounds(45, -40, WIDTH, HEIGHT);
 
         add(botaoOk);
         add(texto1);
