@@ -1,4 +1,6 @@
-package gui;
+package gui.barra_menu;
+
+import gui.barra_menu.TelaAjuda;
 
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -8,13 +10,13 @@ public class BotaoAjuda extends JButton implements ActionListener{
     
     TelaAjuda tela;
     int estado = 0;
-    JLabel txt1, txt2, txt3, txt4;
-    public BotaoAjuda(TelaAjuda tela, JLabel txt1, JLabel txt2, JLabel txt3, JLabel txt4){
+    JLabel txt1, txt2, txt3;
+
+    public BotaoAjuda(TelaAjuda tela, JLabel txt1, JLabel txt2, JLabel txt3){
         this.tela = tela;
         this.txt1 = txt1;
         this.txt2 = txt2;
         this.txt3 = txt3;
-        this.txt4 = txt4;
         addActionListener(this);
     }
 
@@ -42,7 +44,6 @@ public class BotaoAjuda extends JButton implements ActionListener{
                 tela.remove(txt1);
                 tela.remove(txt2);
                 tela.remove(txt3);
-                tela.remove(txt4);
                 tela.add(comandos1);
                 tela.add(comand1);
                 tela.add(comand2);

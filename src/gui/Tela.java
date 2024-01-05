@@ -1,5 +1,8 @@
 package gui;
 
+import gui.barra_menu.ItemAjuda;
+import gui.barra_menu.ItemImportarArquivo;
+
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -66,14 +69,11 @@ public class Tela extends JFrame{
     private void adicionaMenu(){
         JMenuBar barraMenu = new JMenuBar();
         JMenu menuOpcoes = new JMenu("Opções");
-        JMenu ajuda = new JMenu("Ajuda");
 
         menuOpcoes.add(importaArquivo);
+        menuOpcoes.add(new ItemAjuda());
 
         barraMenu.add(menuOpcoes);
-        barraMenu.add(ajuda);
-
-        new MenuClique(ajuda);
         barraMenu.setBackground(Color.lightGray);
         barraMenu.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(2.0f)));
         this.setJMenuBar(barraMenu);

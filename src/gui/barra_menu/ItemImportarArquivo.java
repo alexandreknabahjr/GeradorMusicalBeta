@@ -1,4 +1,6 @@
-package gui;
+package gui.barra_menu;
+
+import gui.CaixaTexto;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
