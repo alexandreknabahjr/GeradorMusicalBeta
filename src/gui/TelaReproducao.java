@@ -13,9 +13,9 @@ import java.awt.*;
 
 public class TelaReproducao extends JFrame{
 
-    private BotaoPausa pausar;
-    private BotaoReproducao reproduzir;
-    private BotaoSalvamento salvar;
+    private final BotaoPausa pausar;
+    private final BotaoReproducao reproduzir;
+    private final BotaoSalvamento salvar;
 
     public TelaReproducao(Sequence decodSeq, ManagedPlayer player) throws IOException{
         configReproducao();
@@ -27,7 +27,7 @@ public class TelaReproducao extends JFrame{
         pausar = new BotaoPausa(player, timer);
         reproduzir = new BotaoReproducao(decodSeq, player, timer);
         salvar = new BotaoSalvamento(decodSeq);
-        adicionaComponentesReproducao(pausar, reproduzir, player);
+        configBotoes();
         setVisible(true);
     }
 
@@ -41,34 +41,7 @@ public class TelaReproducao extends JFrame{
         setIconImage(ImageIO.read(new File("img/nota.png")));
     }
 
-    private void adicionaComponentesReproducao(BotaoPausa pausar, BotaoReproducao reproduzir, ManagedPlayer player){
-
-        ImageIcon pausaIcon = new ImageIcon("img/pause-button.png");
-        Image pauseImage = pausaIcon.getImage(); 
-        Image newimgPause = pauseImage.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
-        pausaIcon = new ImageIcon(newimgPause);
-        pausar.setBounds(250,210,100,100);
-        pausar.setLayout(null);
-        pausar.setIcon(pausaIcon);
-        pausar.setBorder(null);
-        pausar.setBorderPainted(false);
-        //pausar.setContentAreaFilled(false);
-        pausar.setBackground(Color.white);
-        pausar.setOpaque(false);
-
-        ImageIcon reproduzIcon = new ImageIcon("img/play-button.png");
-        Image reproduzImage = reproduzIcon.getImage();
-        Image newimgReproduz = reproduzImage.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
-        reproduzIcon = new ImageIcon(newimgReproduz);
-        reproduzir.setBounds(100, 210, 100, 100);
-        reproduzir.setLayout(null);
-        reproduzir.setIcon(reproduzIcon);
-        reproduzir.setBorder(null);
-        reproduzir.setBorderPainted(false);
-        //reproduzir.setContentAreaFilled(false);
-        reproduzir.setBackground(Color.white);
-        reproduzir.setOpaque(false);
-
+    private void configBotoes() {
         JPanel painel = new JPanel();
         painel.setBounds(70,150,450,11);
         painel.setBackground(Color.black);
