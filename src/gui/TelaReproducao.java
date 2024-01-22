@@ -23,7 +23,7 @@ public class TelaReproducao extends JFrame{
         progresso.setBounds(70, 145, 25, 25);
         progresso.setBackground(Color.black);
         add(progresso);
-        barraDeProgresso timer = new barraDeProgresso(player, progresso, decodSeq);
+        BarraDeProgresso timer = new BarraDeProgresso(player, progresso, decodSeq);
         pausar = new BotaoPausa(player, timer);
         reproduzir = new BotaoReproducao(decodSeq, player, timer);
         salvar = new BotaoSalvamento(decodSeq);

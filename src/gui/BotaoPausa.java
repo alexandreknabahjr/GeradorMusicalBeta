@@ -10,9 +10,9 @@ import org.jfugue.player.ManagedPlayer;
 public class BotaoPausa extends JButton implements ActionListener{
 
     ManagedPlayer player;
-    barraDeProgresso timer;
+    BarraDeProgresso timer;
 
-    public BotaoPausa(ManagedPlayer parser, barraDeProgresso timer){
+    public BotaoPausa(ManagedPlayer parser, BarraDeProgresso timer){
         this.player = parser;
         this.timer = timer;
         configBotao();

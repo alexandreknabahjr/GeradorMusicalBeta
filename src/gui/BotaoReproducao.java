@@ -12,9 +12,9 @@ public class BotaoReproducao extends JButton implements ActionListener{
     
     Sequence musica;
     ManagedPlayer player;
-    barraDeProgresso timer;
+    BarraDeProgresso timer;
 
-    public BotaoReproducao(Sequence decodSequence, ManagedPlayer parser, barraDeProgresso timer){
+    public BotaoReproducao(Sequence decodSequence, ManagedPlayer parser, BarraDeProgresso timer){
         this.musica = decodSequence;
         this.player = parser;
         this.timer = timer;

@@ -7,7 +7,7 @@ import org.jfugue.player.ManagedPlayer;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class barraDeProgresso{
+public class BarraDeProgresso{
 
     static final int MINIMO = 70;
     static final int MAXIMO = 500;
@@ -22,7 +22,7 @@ public class barraDeProgresso{
     boolean pausado;
     boolean iniciado = false;
 
-    public barraDeProgresso(ManagedPlayer player, JPanel progresso, Sequence sequencia){
+    public BarraDeProgresso(ManagedPlayer player, JPanel progresso, Sequence sequencia){
         this.player = player;
         this.progresso = progresso;
         this.atual = MINIMO;
